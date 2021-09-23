@@ -10,6 +10,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @Configuration
 public class AppConfig {
 
+<<<<<<< HEAD
     @Value("${jwt.secret}")
     private String JWT_SECRET;
 
@@ -29,4 +30,25 @@ public class AppConfig {
     public JwtTokenStore tokenStore() {
         return new JwtTokenStore(accessTokenConverter());
     }
+=======
+	@Value("${jwt.secret}")
+	private String jwtSecret;
+	
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+	
+	@Bean
+	public JwtAccessTokenConverter accessTokenConverter() {
+		JwtAccessTokenConverter tokenConverter = new JwtAccessTokenConverter();
+		tokenConverter.setSigningKey(jwtSecret);
+		return tokenConverter;
+	}
+
+	@Bean
+	public JwtTokenStore tokenStore() {
+		return new JwtTokenStore(accessTokenConverter());
+	}	
+>>>>>>> e86b783781f59ad361e28764d7ea73cc3d8a2ed1
 }
